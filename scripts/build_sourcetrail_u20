@@ -12,9 +12,9 @@ cd /build/sourcetrail_u20/build/Release
 cmake \
     -DCMAKE_BUILD_TYPE="Release" \
     -DQt5_DIR=/usr/lib/x86_64-linux-gnu/cmake/Qt5 \
-    -DCMAKE_VERBOSE_MAKEFILE=ON \
+    -DCMAKE_VERBOSE_MAKEFILE=OFF \
     -DBUILD_CXX_LANGUAGE_PACKAGE=ON \
     -DBUILD_JAVA_LANGUAGE_PACKAGE=ON \
     -DBUILD_PYTHON_LANGUAGE_PACKAGE=ON \
     ../..
-make Sourcetrail -j12
+make Sourcetrail -j$(nproc)

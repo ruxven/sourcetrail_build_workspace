@@ -26,13 +26,6 @@ RUN dnf install -y 'dnf-command(config-manager)' && \
 
 RUN dnf clean all
 
-# Install LLVM 11 for CXX indexer compatibility
-# RUN wget -q https://releases.llvm.org/11.0.0/llvm-11.0.0.tar.xz -O /tmp/llvm.tar.xz && \
-#    tar -xf /tmp/llvm.tar.xz -C /opt && \
-#    cd /opt/llvm-11 && mkdir build && cd build && cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DLLVM_TARGETS_TO_BUILD=host .. && make -j$(nproc) && make install && \
-#    export CC=/opt/llvm-11/bin/clang && \
-#    export CXX=/opt/llvm-11/bin/clang++ && \
-#    ln -sf /opt/llvm-11/bin/clang /usr/bin/clang && \
 ARG LLVM_VERSION=10.0.0
 
 ENV LLVM_SRC_TAR_XZ=llvm-$LLVM_VERSION.src.tar.xz

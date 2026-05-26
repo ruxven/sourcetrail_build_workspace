@@ -32,7 +32,7 @@ cmake \
     -DCMAKE_BUILD_TYPE="Release" \
     -DBOOST_ROOT=/usr \
     -DQt5_DIR=${QT5_DIR} \
-    -DCMAKE_VERBOSE_MAKEFILE=ON \
+    -DCMAKE_VERBOSE_MAKEFILE=OFF \
     -DCMAKE_C_COMPILER=${CC} \
     -DCMAKE_CXX_COMPILER=${CXX} \
     -DBUILD_CXX_LANGUAGE_PACKAGE=ON \
@@ -40,4 +40,4 @@ cmake \
     -DBUILD_PYTHON_LANGUAGE_PACKAGE=ON \
     -DCLANG_DIR=${CLANG_DIR} \
     ../..
-make Sourcetrail -j12
+make Sourcetrail -j$(nproc)
