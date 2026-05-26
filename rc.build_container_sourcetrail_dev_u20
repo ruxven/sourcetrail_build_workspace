@@ -1,11 +1,13 @@
 #!/bin/bash -e
 
+source .env
+
 if [[ "clean" = "$1" ]]; then
-podman rmi sourcetrail-dev-u20:latest
+${CONTAINER_TOOL} rmi sourcetrail-dev-u20:latest
 fi
 
 echo "Building sourcetrail-dev-u20 image from sourcetrail-dev-u20/Containerfile"
-podman build \
+${CONTAINER_TOOL} build \
   -t sourcetrail-dev-u20:latest \
   --build-arg USER_UID=$(id -u) \
   --build-arg USER_GID=$(id -g) \

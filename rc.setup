@@ -1,12 +1,38 @@
 #!/bin/bash -e
 
-echo "Cloning Sourcetrail repo..."
-git clone https://github.com/CoatiSoftware/Sourcetrail sourcetrail_ref
+echo "Cloning Sourcetrail reference repo..."
+if [[ ! -d sourcetrail_ref ]]; then
+  git clone https://github.com/CoatiSoftware/Sourcetrail sourcetrail_ref
+fi
 
-git clone sourcetrail_ref sourcetrail_el8
+echo "Cloning Sourcetrail repo for el8..."
+if [[ ! -d sourcetrail_el8 ]]; then
+  git clone sourcetrail_ref sourcetrail_el8
 
-pushd sourcetrail_el8
-git apply ../sourcetrail.el8.diff
-popd
+  pushd sourcetrail_el8
+  git apply ../sourcetrail_el8.diff
+  popd
+fi
 
-git clone sourcetrail_ref sourcetrail_u20
+echo "Cloning Sourcetrail repo for u20..."
+if [[ ! -d sourcetrail_u20 ]]; then
+  git clone sourcetrail_ref sourcetrail_u20
+fi
+
+CONTAINER_TOOL=unknown
+
+echo "Checking if using podman or docker..."
+podman_path=`command -v podman || echo ""`
+docker_path=`command -v docker || echo ""`
+if [[ -n "$podman_path" ]]; then
+  CONTAINER_TOOL=podman
+elif [[ -n  "$docker_path" ]]; then
+  CONTAINER_TOOL=docker
+else
+  echo "Cannot determine if docker or podman is installed!"
+  exit 1
+fi
+
+echo "Writing CONTAINER_TOOL=$CONTAINER_TOOL to .env"
+
+echo "export CONTAINER_TOOL=$CONTAINER_TOOL" > .env
