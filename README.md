@@ -2,7 +2,7 @@
 
 ## What is this?
 
-A repository of scripts for building the abandoned CoatiSoftware Sourctrail project using Podman containers.
+A repository of scripts for building the abandoned [CoatiSoftware Sourcetrail](https://github.com/CoatiSoftware/Sourcetrail) project using Podman containers.
 
 ## Why?
 
@@ -22,10 +22,10 @@ Longer answer: container-based development enables a system to support many diff
 
 1. Clone this repository
 1. Run `./rc.setup`
-  1. This clones the original CoatiSoftware repository, and applies a patch for RHEL8 support.
+    1. This clones the original CoatiSoftware repository, and applies a patch for RHEL8 support.
 1. Run `./rc.build_container_sourcetrail_el8`
-  1. This builds the podman container for compiling sourcetrail in, tags as `sourcetrail-dev-el8:latest`
+    1. This builds the podman container for compiling sourcetrail in, tags as `sourcetrail-dev-el8:latest`
 1. Run `./rc.build_sourcetrail_el8`
-  1. Builds the Sourcetrail code in the Podman container using script `./scripts/build_sourcetrail_el8`
+    1. Builds the Sourcetrail code in the Podman container using script `./scripts/build_sourcetrail_el8`
 
-This can be expanded on for different distributions and/or LLVM versions. There exists an Ubuntu 20.04 container and build for reference, as it Should Just Work(tm).
+This can be expanded on for different distributions and/or LLVM versions. There exists an Ubuntu 20.04 container and build for reference, as it Should Just Work&trade;.
