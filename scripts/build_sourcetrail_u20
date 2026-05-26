@@ -1,0 +1,20 @@
+#!/bin/bash -e
+#
+# Clean previous build artefacts
+rm /build/sourcetrail_u20/build/Release/CMakeCache.txt -f || true
+rm /build/sourcetrail_u20/build/Release/CMakeFiles -rf || true
+mkdir -p /build/sourcetrail_u20/build/Release
+cd /build/sourcetrail_u20/build/Release
+
+#-DBOOST_ROOT=/usr/include/boost \
+mkdir -p /build/sourcetrail_u20/build/Release
+cd /build/sourcetrail_u20/build/Release
+cmake \
+    -DCMAKE_BUILD_TYPE="Release" \
+    -DQt5_DIR=/usr/lib/x86_64-linux-gnu/cmake/Qt5 \
+    -DCMAKE_VERBOSE_MAKEFILE=ON \
+    -DBUILD_CXX_LANGUAGE_PACKAGE=ON \
+    -DBUILD_JAVA_LANGUAGE_PACKAGE=ON \
+    -DBUILD_PYTHON_LANGUAGE_PACKAGE=ON \
+    ../..
+make Sourcetrail -j12

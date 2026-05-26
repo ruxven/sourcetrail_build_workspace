@@ -1,0 +1,35 @@
+FROM ubuntu:20.04
+
+WORKDIR /build
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=America/New_York
+
+RUN apt-get update && apt-get install -y \
+  git \
+  cmake \
+  openjdk-8-jdk \
+  maven \
+  clang \
+  libclang-dev \
+  libclang-cpp10-dev \
+  build-essential \
+  wget \
+  unzip \
+  libboost-all-dev \
+  qt5-default \
+  libqt5svg5-dev
+
+ARG USERNAME=developer
+ARG USER_UID=1000
+ARG USER_GID=1000
+
+RUN groupadd --gid $USER_GID $USERNAME && \
+    useradd --uid $USER_UID --gid $USER_GID --shell /bin/bash --create-home $USERNAME
+
+RUN mkdir -p /build && chown $USER_UID:$USER_GID /build
+
+WORKDIR /build
+USER $USERNAME
+
+CMD ["bash"]

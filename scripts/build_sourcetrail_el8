@@ -1,0 +1,43 @@
+#!/bin/bash -e
+
+echo "=== Build environment ==="
+export CC=/usr/local/bin/clang
+export CXX=/usr/local/bin/clang++
+
+# Ensure compiler paths are set for CMake
+export CLANG_DIR=/usr/local/bin
+export QT5_DIR=/usr/lib64/cmake/Qt5
+export BOOST_ROOT=/usr
+
+# Debug prints for compiler paths used by CMake
+echo "CC=$CC"
+echo "CXX=$CXX"
+echo "CMAKE_C_COMPILER=$CC"
+echo "CMAKE_CXX_COMPILER=$CXX"
+echo "CLANG_DIR=$CLANG_DIR"
+echo "QT5_DIR=$QT5_DIR"
+echo "BOOST_ROOT=${BOOST_ROOT}"
+
+# Clean previous build artefacts
+rm /build/sourcetrail_el8/build/Release/CMakeCache.txt -f || true
+rm /build/sourcetrail_el8/build/Release/CMakeFiles -rf || true
+mkdir -p /build/sourcetrail_el8/build/Release
+cd /build/sourcetrail_el8/build/Release
+
+# Debug prints for compiler paths used by CMake
+echo "Setting CMAKE_C_COMPILER=$CC"
+echo "Setting CMAKE_CXX_COMPILER=$CXX"
+
+cmake \
+    -DCMAKE_BUILD_TYPE="Release" \
+    -DBOOST_ROOT=/usr \
+    -DQt5_DIR=${QT5_DIR} \
+    -DCMAKE_VERBOSE_MAKEFILE=ON \
+    -DCMAKE_C_COMPILER=${CC} \
+    -DCMAKE_CXX_COMPILER=${CXX} \
+    -DBUILD_CXX_LANGUAGE_PACKAGE=ON \
+    -DBUILD_JAVA_LANGUAGE_PACKAGE=ON \
+    -DBUILD_PYTHON_LANGUAGE_PACKAGE=ON \
+    -DCLANG_DIR=${CLANG_DIR} \
+    ../..
+make Sourcetrail -j12

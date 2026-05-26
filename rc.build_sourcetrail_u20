@@ -1,0 +1,21 @@
+#!/bin/bash -e
+
+if [[ "clean" = "$1" ]]; then
+pushd sourcetrail
+git clean -f -x -d
+popd
+exit 0
+fi
+
+echo "Building the application inside the container"
+CMD=$1
+if [[ -z "$CMD" ]]; then
+  CMD="/build/scripts/build_sourcetrail_u20"
+fi
+podman run \
+  -it \
+  --rm \
+  --userns=keep-id \
+  -v "$(pwd):/build:Z" sourcetrail-dev-u20:latest "$CMD"
+
+echo "Build of sourcetrail completed successfully"

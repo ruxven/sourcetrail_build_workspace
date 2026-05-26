@@ -1,0 +1,15 @@
+#!/bin/bash -e
+
+if [[ "clean" = "$1" ]]; then
+podman rmi sourcetrail-dev-u20:latest
+fi
+
+echo "Building sourcetrail-dev-u20 image from sourcetrail-dev-u20/Containerfile"
+podman build \
+  -t sourcetrail-dev-u20:latest \
+  --build-arg USER_UID=$(id -u) \
+  --build-arg USER_GID=$(id -g) \
+  -f sourcetrail-dev-u20/Containerfile \
+  sourcetrail-dev-u20
+
+echo "Image sourcetrail-dev-u20:latest built successfully."

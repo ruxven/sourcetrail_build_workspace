@@ -1,0 +1,23 @@
+commit 1e55180f134d397a0b1749a81c68482c34e19aea
+Author: Silver Weasel <silverweasel@aaathats3as.com>
+Date:   Wed May 20 11:06:16 2026 -0400
+
+    Working configuration (CXX indexing wip)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c3e5d136..1eb4eef3 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -183,7 +183,11 @@ set(Boost_USE_MULTITHREAD ON)
+ set(Boost_USE_STATIC_LIBS ON CACHE BOOL "Set to ON to force the use of the static libraries.")
+ set(Boost_USE_STATIC_RUNTIME OFF)
+ 
+-find_package(Boost 1.67 COMPONENTS system program_options filesystem date_time REQUIRED)
++# Ubuntu 20.04
++# find_package(Boost 1.67 COMPONENTS system program_options filesystem date_time REQUIRED)
++
++# RHEL8
++find_package(Boost 1.66 COMPONENTS system program_options filesystem date_time REQUIRED)
+ 
+ 
+ # Qt ---------------------------------------------------------------------------

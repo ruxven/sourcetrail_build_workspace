@@ -1,0 +1,12 @@
+#!/bin/bash -e
+
+echo "Cloning Sourcetrail repo..."
+git clone https://github.com/CoatiSoftware/Sourcetrail sourcetrail_ref
+
+git clone sourcetrail_ref sourcetrail_el8
+
+pushd sourcetrail_el8
+git apply ../sourcetrail.el8.diff
+popd
+
+git clone sourcetrail_ref sourcetrail_u20
